@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="ru">
+  <head>
+    <!-- Кодировка чтобы русские буквы отображались правильно -->
+    <meta charset="UTF-8">
+
+    <!-- подстраивает ширину страницы -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2048 — браузерная игра</title>
+
+    <!-- подключаем стили -->
+    <link rel="stylesheet" href="./styles.css">
+
+    <!--
+      логика в game.js, defer для того чтобы скрипт работал после загрузки
+    -->
+    <script src="./game.js" defer></script>
+  </head>
+  <body>
+    <!-- main содержит основное содержимое страницы. -->
+    <main class="page">
+      <header class="page__intro">
+        <h1>2048</h1>
+        <p class="page__description">
+          Соединяйте одинаковые числа, чтобы получить плитку 2048.
+        </p>
+
+      </header>
+
+      <!--
+        Собственный HTML-тег игры. Его класс зарегистрирован в game.js.
+        Внутренняя разметка компонента находится в отдельном Shadow DOM.
+      -->
+      <game-2048></game-2048>
+
+      <footer class="page__footer">
+        <p>Игра сохраняется автоматически в этом браузере.</p>
+      </footer>
+    </main>
+  </body>
+</html>
