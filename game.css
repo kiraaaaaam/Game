@@ -1,10 +1,3 @@
-
-:host {
-  display: block;
-  color: #36332e;
-  font: inherit;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -42,7 +35,7 @@
   border-radius: 10px;
   background: #f1ece2;
   color: #82796c;
-  font-size: .75rem;
+  font-size: 0.75rem;
   text-align: center;
 }
 
@@ -102,12 +95,28 @@ button:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
-.cell[data-value="2"] { background: #f5eadb; }
-.cell[data-value="4"] { background: #f0dfc4; }
-.cell[data-value="8"] { background: #eebc83; color: white; }
-.cell[data-value="16"] { background: #e99d69; color: white; }
-.cell[data-value="32"] { background: #e7825e; color: white; }
-.cell[data-value="64"] { background: #dc6245; color: white; }
+.cell[data-value="2"] {
+  background: #f5eadb;
+}
+.cell[data-value="4"] {
+  background: #f0dfc4;
+}
+.cell[data-value="8"] {
+  background: #eebc83;
+  color: white;
+}
+.cell[data-value="16"] {
+  background: #e99d69;
+  color: white;
+}
+.cell[data-value="32"] {
+  background: #e7825e;
+  color: white;
+}
+.cell[data-value="64"] {
+  background: #dc6245;
+  color: white;
+}
 
 .cell[data-value="128"],
 .cell[data-value="256"],
@@ -119,7 +128,7 @@ button:focus-visible {
 .cell.large {
   background: #bca452;
   color: white;
-  font-size: clamp(.8rem, 5vw, 1.4rem);
+  font-size: clamp(0.8rem, 5vw, 1.4rem);
 }
 
 .overlay {
@@ -150,19 +159,16 @@ button:focus-visible {
 
 .help {
   margin: 14px 0 0;
-  font-size: .9rem;
+  font-size: 0.9rem;
   text-align: center;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-}
-
 @media (max-width: 420px) {
-  .game { padding: 12px; }
-  .board { gap: 5px; padding: 5px; }
+  .game {
+    padding: 12px;
+  }
+  .board {
+    gap: 5px;
+    padding: 5px;
+  }
 }
