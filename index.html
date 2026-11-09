@@ -1,41 +1,88 @@
 <!doctype html>
-
 <html lang="ru">
   <head>
-    <!-- Кодировка чтобы русские буквы отображались правильно -->
-    <meta charset="UTF-8">
-
-    <!-- подстраивает ширину страницы -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f3ed" />
     <title>2048 — браузерная игра</title>
-
-    <!-- подключаем стили -->
-    <link rel="stylesheet" href="./styles.css">
-
-    <!--
-      логика в game.js, defer для того чтобы скрипт работал после загрузки
-    -->
-    <script src="./game.js" defer></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./game.css" />
+    <script type="module" src="./src/main.js"></script>
   </head>
   <body>
-    <!-- main содержит основное содержимое страницы. -->
     <main class="page">
       <header class="page__intro">
         <h1>2048</h1>
         <p class="page__description">
           Соединяйте одинаковые числа, чтобы получить плитку 2048.
         </p>
-
       </header>
 
-      <!--
-        Собственный HTML-тег игры. Его класс зарегистрирован в game.js.
-        Внутренняя разметка компонента находится в отдельном Shadow DOM.
-      -->
-      <game-2048></game-2048>
+      <section class="game" aria-label="Игра 2048">
+        <header class="top">
+          <p>Соберите плитку 2048</p>
+          <div class="scores">
+            <label>Очки <output data-score>0</output></label>
+            <label>Рекорд <output data-best>0</output></label>
+          </div>
+          <button type="button" data-new>Новая игра</button>
+        </header>
+
+        <div class="board-wrap">
+          <div
+            class="board"
+            data-board
+            role="grid"
+            aria-label="Игровое поле 4 на 4"
+          >
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+            <div class="cell" role="gridcell" data-value="0"></div>
+          </div>
+          <div class="overlay" data-overlay hidden>
+            <div>
+              <h2 data-title></h2>
+              <p data-message></p>
+              <button type="button" data-action></button>
+            </div>
+          </div>
+        </div>
+        <p class="help">Управление: стрелки на клавиатуре.</p>
+      </section>
+
+      <section class="task-panel" aria-labelledby="tasks-title">
+        <h2 id="tasks-title">Мои цели</h2>
+        <form data-task-form>
+          <label class="sr-only" for="task-input">Новая цель</label>
+          <input
+            id="task-input"
+            name="task"
+            data-task-input
+            type="text"
+            maxlength="80"
+            placeholder="Например, собрать плитку 128"
+            autocomplete="off"
+          />
+          <button type="submit">Добавить</button>
+        </form>
+        <ul class="task-list" data-task-list aria-live="polite"></ul>
+      </section>
 
       <footer class="page__footer">
-        <p>Игра сохраняется автоматически в этом браузере.</p>
+        <p>Партия и цели сохраняются автоматически в этом браузере.</p>
       </footer>
     </main>
   </body>
