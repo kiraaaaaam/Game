@@ -6,8 +6,8 @@ import {
   mergeLine,
   move,
   reduceGame,
-} from "../src/game.js";
-import { loadGame, saveGame } from "../src/storage.js";
+} from "../src/game.ts";
+import { loadGame, saveGame } from "../src/storage.ts";
 
 function stateWithBoard(board, overrides = {}) {
   return {
@@ -119,4 +119,19 @@ test("typing a goal survives game actions and goals can be added and removed", (
   assert.equal(added.tasks[0].text, "Собрать плитку 128");
   assert.equal(added.taskDraft, "");
   assert.deepEqual(removed.tasks, []);
+});
+
+test("save schema rejects duplicate goal IDs and impossible lost status", () => {
+  const game = createGame();
+  const duplicateGoals = {
+    ...game,
+    tasks: [
+      { id: "same", text: "Первая цель" },
+      { id: "same", text: "Вторая цель" },
+    ],
+  };
+  assert.equal(gameSchema.safeParse(duplicateGoals).success, false);
+
+  const impossibleLost = { ...game, status: "lost" };
+  assert.equal(gameSchema.safeParse(impossibleLost).success, false);
 });
