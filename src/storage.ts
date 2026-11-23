@@ -1,9 +1,9 @@
-import { gameSchema } from "./game.js";
+import { gameSchema, type GameState } from "./game.ts";
 
 const STORAGE_KEY = "simple-2048-save-v2";
 
-export function loadGame() {
-  let saved;
+export function loadGame(): GameState | null {
+  let saved: string | null;
   try {
     saved = localStorage.getItem(STORAGE_KEY);
   } catch (error) {
@@ -13,19 +13,20 @@ export function loadGame() {
 
   if (!saved) return null;
 
-  let parsed;
+  let parsed: unknown;
   try {
     parsed = JSON.parse(saved);
   } catch (error) {
     if (error instanceof SyntaxError) return null;
-    throw error;
+    console.warn("Не удалось разобрать сохранение игры.", error);
+    return null;
   }
 
   const result = gameSchema.safeParse(parsed);
-  return result.success ? result.data : null;
+  return result.success ? (result.data as GameState) : null;
 }
 
-export function saveGame(state) {
+export function saveGame(state: GameState): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (error) {
