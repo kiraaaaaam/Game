@@ -1,3 +1,4 @@
-/.idea
-/.idea
-.idea/encodings.xml
+node_modules/
+dist/
+coverage/
+.idea/
